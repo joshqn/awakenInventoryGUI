@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+  </head>
+  <body>
+	  
+	  <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Awaken Inventory</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="index.html">Home</a></li>
+            <li class="active"><a href="inventory.html">Inventory</a></li>
+            <li><a href="sales.html">Sales</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    
+    <div class="container">
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>Awaken Inventory and Sales</h1>
+        <div class="row">
+	        <form class="navbar-form" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" id="search-box">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit" id="search-button"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        	<table class="table table-striped">
+	        	<thead>
+							<tr>
+								<th>SKU</th>
+								<th>Item</th>
+								<th>Stock</th>
+      				</tr>
+      				<tbody id="table-body">
+      				</tbody>
+    				</thead>
+					</table>
+      </div>
+
+    </div> <!-- /container -->
+	  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    
+    <script>
+	    
+	    	var inventory = { "Inventory": [
+					{"number": "1234asdf", "item": "Summer Scarf", "stock": "3"},
+					{"number": "4567ghjk", "item": "Skinny Jeans", "stock": "23"},
+					{"number": "0987opiu", "item": "Hipster Beanie", "stock": "65"}
+					]
+				};
+				
+				var html = '';
+	    
+	    $( document ).ready(function() {
+				var q = getParameterByName('q')
+				
+				
+				
+				$.each(inventory.Inventory, function(i ,v) {
+					
+					if(v.item.indexOf(q) != -1){
+						
+						 html += "<tr><td>" 
+						 html += v.number 
+						 html += "</td>"
+						 html += "<td>" 
+						 html += v.item 
+						 html += "</td>"
+						 html += "<td>" 
+						 html += v.stock 
+						 html += "</td></tr>"
+					}
+					
+				});
+				
+				document.getElementById('table-body').innerHTML = html;
+				
+			});
+	    
+	    $("#search-button").click(function(){
+		    var bla = $("#search-box").val();
+	    })
+	    
+			function getParameterByName(name, url) {
+				if (!url) {
+						url = window.location.href;
+    		}
+				name = name.replace(/[\[\]]/g, "\\$&");
+				var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        	results = regex.exec(url);
+				if (!results) return null;
+				if (!results[2]) return '';
+				return decodeURIComponent(results[2].replace(/\+/g, " "));
+			}
+			
+			
+		
+    </script>
+    
+  </body>
+</html>
